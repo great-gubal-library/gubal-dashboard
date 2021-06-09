@@ -120,12 +120,6 @@ export const SelectField: <T>(props: SelectFieldProps<T>) => React.ReactElement<
       name={name}
       validate={validate}
       render={({ input }) => {
-        const change = (value: any) => {
-          if (onChangeSideEffect && value)
-            onChangeSideEffect(value);
-          input.onChange(value)
-        }
-
         return <Select
           id={input.id}
           name={input.name}
@@ -135,7 +129,7 @@ export const SelectField: <T>(props: SelectFieldProps<T>) => React.ReactElement<
           disabled={disabled}
           required={required}
           getOptionString={getOptionString}
-          onChange={change}
+          onChange={(value: any) => { input.onChange(value) }}
           type={type}
         />;
       }

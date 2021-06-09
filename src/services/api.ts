@@ -38,6 +38,7 @@ export const fetchLocations = async () => {
 };
 
 export const createLocation = async (location: IEditLocation) => {
+  console.log("API CREATE LOCATION", location);
   return api.post(API_PATHS.locations.locations, location);
 };
 
@@ -54,4 +55,4 @@ export const updateLocation = async (id: number, location: IEditLocation) => {
 export const deleteLocation = async (id: number) => {
   const path = API_PATHS.locations.singleLocation.replace('{ID}', id.toString());
   return api.delete(path);
-};
+}

@@ -40,6 +40,8 @@ export const Layout: FC<LayoutProps> = ({
   headerText,
   screenActions,
   children,
+  header,
+  backUrl,
   overflow = 'auto'
 }) => {
   return (
@@ -49,7 +51,12 @@ export const Layout: FC<LayoutProps> = ({
       </Sidebar>
       <Content>
         {(screenActions?.length || headerText?.length) &&
-          <ScreenHeader screenActions={screenActions} headerText={headerText} />
+          <ScreenHeader
+            screenActions={screenActions}
+            headerText={headerText}
+            showBackButton={header === 'back'}
+            backUrl={backUrl}
+          />
         }
         <MainContentWrapper px={8} pt={2} pb={8} overflow={overflow}>
           {children}

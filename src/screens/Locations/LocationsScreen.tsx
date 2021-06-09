@@ -54,12 +54,12 @@ export const LocationsScreen: FC<LocationsScreenProps> = observer(() => {
     Header: "Name",
     Cell: CellRenderers.link(row => `/locations/${row.id}`),
   }, {
-    accessor: 'owner',
-    Header: "Owner",
-    Cell: CellRenderers.link(row => `/locations/${row.id}`),
-  }, {
     accessor: 'inGameLocation',
     Header: "Location",
+    Cell: CellRenderers.link(row => `/locations/${row.id}`),
+  }, {
+    accessor: 'owner',
+    Header: "Owner",
     Cell: CellRenderers.link(row => `/locations/${row.id}`),
   }, {
     accessor: 'edit',

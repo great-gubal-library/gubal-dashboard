@@ -2,15 +2,19 @@ import React, { FC } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { Form } from 'react-final-form';
 import { Input, SubmitButton, SelectField } from '../../components/FormControls';
-import { IEditLocation } from '../../types/Location';
+import { IEditLocation, ILocation } from '../../types/Location';
+import { gameServers } from '../../constants/gameServers';
+import { dataCenters } from '../../constants';
 
 export interface LocationDetailsFormProps {
+  initialValues: ILocation | null;
   onSubmit: (value: IEditLocation) => void;
 }
 
-export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit }) => {
+export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, initialValues }) => {
   return <Form
     onSubmit={onSubmit}
+    initialValues={initialValues}
     render={({ handleSubmit, submitting, pristine, invalid }) => 
       <form onSubmit={handleSubmit}>
         <Box p={8}>
@@ -29,8 +33,8 @@ export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit }) 
           <Grid container spacing={8}>
             <Grid item sm={12}>
               <Input
-                id="location"
-                name="location"
+                id="inGameLocation"
+                name="inGameLocation"
                 label="In-game location"
                 required
                 validate={(v: any) => v !== null ? undefined : "Validation required"}
@@ -91,17 +95,17 @@ export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit }) 
                 id="server"
                 name="server"
                 label="Server"
-                options={[false, true]}
-                getOptionString={key => key ? "Somewhere else" : "Omega"}
+                options={gameServers}
+                getOptionString={server => server ? server : "Omega"}
               />
             </Grid>
             <Grid item xs={6} sm={4}>
               <SelectField
                 id="datacenter"
                 name="datacenter"
-                label="Datacenter"
-                options={[false, true]}
-                getOptionString={key => key ? "Somewhere else" : "Chaos"}
+                label="Data center"
+                options={dataCenters}
+                getOptionString={dc => dc ? dc : "Chaos"}
               />
             </Grid>
           </Grid>
