@@ -27,7 +27,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
             size="large"
             type="submit"
             variant="contained"
-            color="primary"
+            color="secondary"
             disabled={disabled}
             disableElevation>
             Submit

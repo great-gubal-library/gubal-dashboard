@@ -1,13 +1,15 @@
 
 import { LocationsScreen } from '../screens/Locations/LocationsScreen';
 import { AddLocationScreen } from '../screens/Locations/AddLocationScreen';
+import { EditLocationScreen } from '../screens/Locations/EditLocationScreen';
 import { HomeScreen } from '../screens/Home/HomeScreen';
+import { IRoute } from '../types/Navigation';
 import { default as HomeIcon } from '@material-ui/icons/Home';
 import { default as AddLocationIcon } from '@material-ui/icons/AddLocation';
 import { default as ExploreIcon } from '@material-ui/icons/Explore';
 import { default as PersonIcon } from '@material-ui/icons/Person';
 import { default as PeopleIcon } from '@material-ui/icons/People';
-import { IRoute } from '../types/Navigation';
+import { default as EditIcon } from '@material-ui/icons/Edit';
 
 const home: IRoute = {
   name: 'Home',
@@ -29,6 +31,12 @@ const locations: IRoute[] = [{
   component: AddLocationScreen,
   iconComponent: AddLocationIcon,
   description: "Add a new location",
+}, {
+  name: 'Location info',
+  href: '/locations/:id',
+  component: EditLocationScreen,
+  iconComponent: EditIcon,
+  description: "Location information",
 }]
 
 const characters: IRoute[] = [{

@@ -47,6 +47,7 @@ class LocationsModel implements ILocationsStore {
     this.loadingState.loading = true;
     try {
       const { data: location }: AxiosResponse<ILocation> = yield api.fetchSingleLocation(id);
+      console.log("GET LOCATION", location);
       this.singleLocation = location;
       
       this.loadingState.loading = false;
@@ -89,8 +90,7 @@ class LocationsModel implements ILocationsStore {
   @action updateLocation = flow(function* (this: LocationsModel, id: number, location: IEditLocation) {
     this.loadingState.loading = true;
     try {
-      const response: AxiosResponse<ILocation> = yield api.updateLocation(id, location);
-      this.singleLocation = response.data;
+      yield api.updateLocation(id, location);
 
       this.loadingState.loading = false;
       this.loadingState.error = false;
