@@ -2,34 +2,32 @@ import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { Layout } from '../../components/Layout/Layout';
 import { FormBox } from '../../components/FormLayout';
-import { LocationDetailsForm } from './LocationDetailsForm';
+import { CharacterDetailsForm } from './CharacterDetailsForm';
 import { useStores } from '../../stores/index';
 import { useHistory } from 'react-router-dom';
-import { ILocation } from '../../types/Location';
+import { ICharacter } from '../../types/Character';
 
-export interface AddLocationScreenProps {
+export interface AddCharacterScreenProps {
   
 }
 
-export const AddLocationScreen: FC<AddLocationScreenProps> = observer(() => {
+export const AddCharacterScreen: FC<AddCharacterScreenProps> = observer(() => {
   const {
-    locationsStore: {
-      createLocation
+    charactersStore: {
+      createCharacter
     },
   } = useStores();
 
   const history = useHistory();
 
   const onSubmit = async (formValues: any) => {
-    await createLocation(formValues);
-    history.push('/locations');
+    await createCharacter(formValues);
+    history.push('/characters');
   };
 
-  const initialValues: ILocation = {
+  const initialValues: ICharacter = {
     id: 0,
     name: "",
-    inGameLocation: "",
-    owner: "",
     description: "",
     externalLink: "",
     tags: "",
@@ -38,9 +36,9 @@ export const AddLocationScreen: FC<AddLocationScreenProps> = observer(() => {
   };
 
   return (
-    <Layout header='back' backUrl='/locations' headerText="Add a new location">
+    <Layout header='back' backUrl='/characters' headerText="Add a new Character">
       <FormBox>
-        <LocationDetailsForm
+        <CharacterDetailsForm
           onSubmit={onSubmit}
           initialValues={initialValues}
         />
