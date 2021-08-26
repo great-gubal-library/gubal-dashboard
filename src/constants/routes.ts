@@ -2,6 +2,9 @@
 import { LocationsScreen } from '../screens/Locations/LocationsScreen';
 import { AddLocationScreen } from '../screens/Locations/AddLocationScreen';
 import { EditLocationScreen } from '../screens/Locations/EditLocationScreen';
+import { CharactersScreen } from '../screens/Characters/CharactersScreen';
+import { AddCharacterScreen } from '../screens/Characters/AddCharacterScreen';
+import { EditCharacterScreen } from '../screens/Characters/EditCharacterScreen';
 import { HomeScreen } from '../screens/Home/HomeScreen';
 import { IRoute } from '../types/Navigation';
 import { default as HomeIcon } from '@material-ui/icons/Home';
@@ -43,9 +46,20 @@ const characters: IRoute[] = [{
   name: 'Characters',
   href: '/characters',
   iconComponent: PersonIcon,
-  component: LocationsScreen,
-  description: "Manage all added characters here",
-  disabled: true
+  component: CharactersScreen,
+  description: "Manage all added characters here"
+}, {
+  name: 'Add Character',
+  href: '/characters/add',
+  component: AddCharacterScreen,
+  iconComponent: AddLocationIcon,
+  description: "Add a new character",
+}, {
+  name: 'Character info',
+  href: '/characters/:id',
+  component: EditCharacterScreen,
+  iconComponent: EditIcon,
+  description: "Character information",
 }]
 
 const freeCompanies: IRoute[] = [{

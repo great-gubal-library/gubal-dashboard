@@ -104,18 +104,19 @@ const SelectFormControl = styled<any>(FormControl)`
 interface SelectFieldProps<T> {
   id: string;
   name: string;
+  value?: T | null;
   options: T[];
   label?: string;
   getOptionString: (t: T) => string;
   required?: boolean;
   validate?: any;
-  onChangeSideEffect?: (v: T) => void;
+  onChange?: (v: T) => void | null;
   disabled?: boolean;
   type?: 'normal' | 'thin' | 'verythin';
 }
 
 export const SelectField: <T>(props: SelectFieldProps<T>) => React.ReactElement<SelectFieldProps<T>> = 
-  ({id, name, options, label, getOptionString, required, validate, onChangeSideEffect, disabled = false, type = 'normal'}) =>
+  ({id, name, value = null, options, label, getOptionString, required, validate, onChange = null, disabled = false, type = 'normal'}) =>
     <Field 
       name={name}
       validate={validate}
@@ -123,13 +124,13 @@ export const SelectField: <T>(props: SelectFieldProps<T>) => React.ReactElement<
         return <Select
           id={input.id}
           name={input.name}
-          value={input.value}
+          value={value ? value : input.value}
           options={options}
           label={label}
           disabled={disabled}
           required={required}
           getOptionString={getOptionString}
-          onChange={(value: any) => { input.onChange(value) }}
+          onChange={onChange ? onChange : (value: any) => { input.onChange(value) }}
           type={type}
         />;
       }

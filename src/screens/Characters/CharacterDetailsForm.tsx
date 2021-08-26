@@ -2,18 +2,17 @@ import React, { FC, useState } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { Form } from 'react-final-form';
 import { Input, SubmitButton, SelectField } from '../../components/FormControls';
-import { IEditLocation, ILocation } from '../../types/Location';
+import { IEditCharacter, ICharacter } from '../../types/Character';
 import { gameServers } from '../../constants/gameServers';
 import { dataCenters } from '../../constants';
 
-export interface LocationDetailsFormProps {
-  initialValues: ILocation | null;
-  onSubmit: (value: IEditLocation) => void;
+export interface CharacterDetailsFormProps {
+  initialValues: ICharacter | null;
+  onSubmit: (value: IEditCharacter) => void;
 }
 
-export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, initialValues }) => {
+export const CharacterDetailsForm: FC<CharacterDetailsFormProps> = ({ onSubmit, initialValues }) => {
   const [currentDatacenter, setCurrentDatacenter] = useState("Chaos");
-  console.info(currentDatacenter);
   return <Form
     onSubmit={onSubmit}
     initialValues={initialValues}
@@ -27,29 +26,6 @@ export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, in
                 name="name"
                 label="Name"
                 required
-                validate={(v: any) => v !== null ? undefined : "Validation required"}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={8}>
-            <Grid item sm={12}>
-              <Input
-                id="inGameLocation"
-                name="inGameLocation"
-                label="In-game location"
-                required
-                validate={(v: any) => v !== null ? undefined : "Validation required"}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={8}>
-            <Grid item sm={12}>
-              <Input
-                id="owner"
-                name="owner"
-                label="Owner"
                 validate={(v: any) => v !== null ? undefined : "Validation required"}
               />
             </Grid>

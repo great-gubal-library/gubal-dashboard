@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { API_URLS } from '../constants/siteSettings';
 import { IEditLocation } from '../types/Location';
+import { IEditCharacter } from '../types/Character';
 import errorHandler from './apiErrorService';
 
 export const API_PATHS = Object.freeze({
   locations: {
     locations: `/locations`,
     singleLocation: `/locations/{ID}`
+  },
+  characters: {
+    characters: `/characters`,
+    singleCharacter: `/characters/{ID}`
   }
 });
 
@@ -54,5 +59,33 @@ export const updateLocation = async (id: number, location: IEditLocation) => {
 
 export const deleteLocation = async (id: number) => {
   const path = API_PATHS.locations.singleLocation.replace('{ID}', id.toString());
+  return api.delete(path);
+}
+
+/**
+ * Characters
+ */
+ export const fetchCharacters = async () => {
+  const response = await api.get(API_PATHS.characters.characters);
+  return response;
+};
+
+export const createCharacter = async (character: IEditCharacter) => {
+  console.log("API CREATE CHARACTER", character);
+  return api.post(API_PATHS.characters.characters, character);
+};
+
+export const fetchSingleCharacter = async (id: number) => {
+  const path = API_PATHS.characters.singleCharacter.replace('{ID}', id.toString());
+  return api.get(path);
+};
+
+export const updateCharacter = async (id: number, location: IEditCharacter) => {
+  const path = API_PATHS.locations.singleLocation.replace('{ID}', id.toString());
+  return api.put(path, location);
+};
+
+export const deleteCharacter = async (id: number) => {
+  const path = API_PATHS.characters.singleCharacter.replace('{ID}', id.toString());
   return api.delete(path);
 }
