@@ -2,16 +2,16 @@ import React, { FC, useState } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { Form } from 'react-final-form';
 import { Input, SubmitButton, SelectField } from '../../components/FormControls';
-import { IEditLocation, ILocation } from '../../types/Location';
+import { IEditFC, IFC } from '../../types/FC';
 import { gameServers } from '../../constants/gameServers';
 import { dataCenters } from '../../constants';
 
-export interface LocationDetailsFormProps {
-  initialValues: ILocation | null;
-  onSubmit: (value: IEditLocation) => void;
+export interface FCDetailsFormProps {
+  initialValues: IFC | null;
+  onSubmit: (value: IEditFC) => void;
 }
 
-export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, initialValues }) => {
+export const FCDetailsForm: FC<FCDetailsFormProps> = ({ onSubmit, initialValues }) => {
   const [currentDatacenter, setCurrentDatacenter] = useState("Chaos");
   return <Form
     onSubmit={onSubmit}
@@ -34,10 +34,12 @@ export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, in
           <Grid container spacing={8}>
             <Grid item sm={12}>
               <Input
-                id="inGameLocation"
-                name="inGameLocation"
-                label="In-game location"
+                id="description"
+                name="description"
+                label="Description"
                 required
+                multiline
+                rows={6}
                 validate={(v: any) => v !== null ? undefined : "Validation required"}
               />
             </Grid>
@@ -49,6 +51,7 @@ export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, in
                 id="owner"
                 name="owner"
                 label="Owner"
+                required
                 validate={(v: any) => v !== null ? undefined : "Validation required"}
               />
             </Grid>
@@ -57,11 +60,9 @@ export const LocationDetailsForm: FC<LocationDetailsFormProps> = ({ onSubmit, in
           <Grid container spacing={8}>
             <Grid item sm={12}>
               <Input
-                id="description"
-                name="description"
-                label="Description"
-                multiline
-                rows={6}
+                id="location"
+                name="location"
+                label="Location"
                 validate={(v: any) => v !== null ? undefined : "Validation required"}
               />
             </Grid>

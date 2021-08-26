@@ -37,6 +37,7 @@ export const CharacterDetailsForm: FC<CharacterDetailsFormProps> = ({ onSubmit, 
                 id="description"
                 name="description"
                 label="Description"
+                required
                 multiline
                 rows={6}
                 validate={(v: any) => v !== null ? undefined : "Validation required"}

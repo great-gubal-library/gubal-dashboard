@@ -5,6 +5,9 @@ import { EditLocationScreen } from '../screens/Locations/EditLocationScreen';
 import { CharactersScreen } from '../screens/Characters/CharactersScreen';
 import { AddCharacterScreen } from '../screens/Characters/AddCharacterScreen';
 import { EditCharacterScreen } from '../screens/Characters/EditCharacterScreen';
+import { FCsScreen } from '../screens/FCs/FCsScreen';
+import { AddFCScreen } from '../screens/FCs/AddFCScreen';
+import { EditFCScreen } from '../screens/FCs/EditFCScreen';
 import { HomeScreen } from '../screens/Home/HomeScreen';
 import { IRoute } from '../types/Navigation';
 import { default as HomeIcon } from '@material-ui/icons/Home';
@@ -27,7 +30,7 @@ const locations: IRoute[] = [{
   href: '/locations',
   iconComponent: ExploreIcon,
   component: LocationsScreen,
-  description: "Manage all added locations here"
+  description: "Manage all added locations here",
 }, {
   name: 'Add location',
   href: '/locations/add',
@@ -64,11 +67,22 @@ const characters: IRoute[] = [{
 
 const freeCompanies: IRoute[] = [{
   name: 'Free Companies',
-  href: '/freeCompanies',
+  href: '/free-companies',
   iconComponent: PeopleIcon,
-  component: LocationsScreen,
+  component: FCsScreen,
   description: "Manage all added Free Companies here",
-  disabled: true
+}, {
+  name: 'Add Free Company',
+  href: '/free-companies/add',
+  component: AddFCScreen,
+  iconComponent: AddLocationIcon,
+  description: "Add a new free company",
+}, {
+  name: 'Free Company info',
+  href: '/free-companies/:id',
+  component: EditFCScreen,
+  iconComponent: EditIcon,
+  description: "Free Company information",
 }]
 
 export const ROUTES: IRoute[] = [

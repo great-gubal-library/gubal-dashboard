@@ -8,17 +8,17 @@ import { CellRenderers } from '../../components/MaterialTable/CellRenderers'
 import { ConfirmDialog } from '../../components/Dialog/ConfirmDialog'
 import { RootStore } from '../../stores/Stores';
 
-export interface LocationsScreenProps {
+export interface FCsScreenProps {
 
 }
 
-export const LocationsScreen: FC<LocationsScreenProps> = observer(() => {
+export const FCsScreen: FC<FCsScreenProps> = observer(() => {
   const {
-    locationsStore: {
-      locations,
+    FCsStore: {
+      FCs,
       loadingState,
-      initializeLocationListing,
-      deleteLocation
+      initializeFCListing,
+      deleteFC
     },
   } = useStores() as RootStore;
   const history = useHistory();
@@ -26,8 +26,8 @@ export const LocationsScreen: FC<LocationsScreenProps> = observer(() => {
   const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
 
   useEffect(() => {
-    initializeLocationListing();
-  }, [initializeLocationListing]);
+    initializeFCListing();
+  }, [initializeFCListing]);
 
   const handleDeleteClick = ({ id }: any) => {
     if (id) {
@@ -39,11 +39,11 @@ export const LocationsScreen: FC<LocationsScreenProps> = observer(() => {
   const confirmDialog =
     <ConfirmDialog
       open={showConfirmDeleteDialog}
-      title="Are you sure you want to delete the location?"
+      title="Are you sure you want to delete the FC?"
       onAccept={() => {
         setShowConfirmDeleteDialog(false);
         if (deleteId) {
-          deleteLocation(deleteId);
+          deleteFC(deleteId);
         }
       }}
       onCancel={() => setShowConfirmDeleteDialog(false)}
@@ -52,19 +52,19 @@ export const LocationsScreen: FC<LocationsScreenProps> = observer(() => {
   const columns = [{
     accessor: 'name',
     Header: "Name",
-    Cell: CellRenderers.link(row => `/locations/${row.id}`),
+    Cell: CellRenderers.link(row => `/FCs/${row.id}`),
   }, {
     accessor: 'tags',
     Header: "Tags",
-    Cell: CellRenderers.link(row => `/locations/${row.id}`),
+    Cell: CellRenderers.link(row => `/FCs/${row.id}`),
   }, {
-    accessor: 'inGameLocation',
-    Header: "Location",
-    Cell: CellRenderers.link(row => `/locations/${row.id}`),
+    accessor: 'owner',
+    Header: "Owner",
+    Cell: CellRenderers.link(row => `/FCs/${row.id}`),
   }, {
     accessor: 'edit',
     Header: "Edit",
-    Cell: CellRenderers.editIcon(row => `/locations/${row.id}`),
+    Cell: CellRenderers.editIcon(row => `/FCs/${row.id}`),
   }, {
     accessor: 'id',
     Header: "Delete",
@@ -72,17 +72,17 @@ export const LocationsScreen: FC<LocationsScreenProps> = observer(() => {
   }];
 
   const screenActions = [{
-    label: "Add new location",
+    label: "Add new Free Company",
     handler: () => {
-      history.push('/locations/add')
+      history.push('/free-companies/add')
     }
   }];
 
   return (
-    <Layout screenActions={screenActions} headerText="Roleplay Venues">
+    <Layout screenActions={screenActions} headerText="RP Free Companies">
       {confirmDialog}
       <Table
-        data={loadingState.loading ? [] : (locations ?? [])}
+        data={loadingState.loading ? [] : (FCs ?? [])}
         columns={columns}
       />
     </Layout>
