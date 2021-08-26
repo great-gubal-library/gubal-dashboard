@@ -102,7 +102,7 @@ export const SideMenu: FC<SideMenuProps> = () => {
         </PictureContainer>
         <Typography variant="h4" color="secondary">Gubal Steward</Typography>
       </HomeLink>
-      {ROUTES.map(route => (
+      {ROUTES.map((route, index) => (
         route.name !== "Home" &&
         <SideMenuItem
           key={route.href}

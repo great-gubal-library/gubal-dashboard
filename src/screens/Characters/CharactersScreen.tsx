@@ -57,10 +57,12 @@ export const CharactersScreen: FC<CharactersScreenProps> = observer(() => {
   {
     accessor: 'tags',
     Header: "Tags",
+    Cell: CellRenderers.link(row => `/characters/${row.id}`),
   },
   {
     accessor: 'server',
     Header: "Server",
+    Cell: CellRenderers.link(row => `/characters/${row.id}`),
   },
   {
     accessor: 'edit',
@@ -80,7 +82,7 @@ export const CharactersScreen: FC<CharactersScreenProps> = observer(() => {
   }];
 
   return (
-    <Layout screenActions={screenActions} headerText="Characters">
+    <Layout screenActions={screenActions} headerText="RP Characters">
       {confirmDialog}
       <Table
         data={loadingState.loading ? [] : (Characters ?? [])}

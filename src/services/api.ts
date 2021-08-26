@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_URLS } from '../constants/siteSettings';
 import { IEditLocation } from '../types/Location';
 import { IEditCharacter } from '../types/Character';
+import { IEditFC } from '../types/FC';
 import errorHandler from './apiErrorService';
 
 export const API_PATHS = Object.freeze({
@@ -12,6 +13,10 @@ export const API_PATHS = Object.freeze({
   characters: {
     characters: `/characters`,
     singleCharacter: `/characters/{ID}`
+  },
+  FCs: {
+    FCs: `free-companies`,
+    singleFC: `/free-companies/{ID}`
   }
 });
 
@@ -87,5 +92,33 @@ export const updateCharacter = async (id: number, location: IEditCharacter) => {
 
 export const deleteCharacter = async (id: number) => {
   const path = API_PATHS.characters.singleCharacter.replace('{ID}', id.toString());
+  return api.delete(path);
+}
+
+/**
+ * FCs
+ */
+ export const fetchFCs = async () => {
+  const response = await api.get(API_PATHS.FCs.FCs);
+  return response;
+};
+
+export const createFC = async (FC: IEditFC) => {
+  console.log("API CREATE FC", FC);
+  return api.post(API_PATHS.FCs.FCs, FC);
+};
+
+export const fetchSingleFC = async (id: number) => {
+  const path = API_PATHS.FCs.singleFC.replace('{ID}', id.toString());
+  return api.get(path);
+};
+
+export const updateFC = async (id: number, FC: IEditFC) => {
+  const path = API_PATHS.FCs.singleFC.replace('{ID}', id.toString());
+  return api.put(path, FC);
+};
+
+export const deleteFC = async (id: number) => {
+  const path = API_PATHS.FCs.singleFC.replace('{ID}', id.toString());
   return api.delete(path);
 }
